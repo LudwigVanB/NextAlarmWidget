@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="today_abbreviation">Auj.</string>
+  <string name="tomorrow_abbreviation">Dem.</string>
+</resources>
