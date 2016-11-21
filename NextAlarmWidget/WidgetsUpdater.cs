@@ -2,6 +2,9 @@ using Android.Content;
 using Android.Widget;
 using Android.Appwidget;
 using Android.Views;
+using Android.App;
+using Java.Util;
+using Java.Lang;
 
 namespace NextAlarmWidget
 {
@@ -32,6 +35,16 @@ namespace NextAlarmWidget
             ComponentName thisWidget = new ComponentName(context, Java.Lang.Class.FromType(typeof(Widget)).Name);
             AppWidgetManager manager = AppWidgetManager.GetInstance(context);
             manager.UpdateAppWidget(thisWidget, updateViews);
+
+
+            var refreshIntent = new Intent(context, typeof(AlarmClockChangedReceiver));
+            PendingIntent pendingRefreshIntent = PendingIntent.GetBroadcast(context, 0, refreshIntent, PendingIntentFlags.UpdateCurrent);
+            Calendar calendar = Calendar.GetInstance(Locale.Default);
+            calendar.TimeInMillis = JavaSystem.CurrentTimeMillis();
+            calendar.Set(CalendarField.HourOfDay, 0);
+            calendar.Set(CalendarField.Minute, 01);                
+            AlarmManager alarmManager = (AlarmManager)context.GetSystemService(Context.AlarmService);
+            alarmManager.SetRepeating(AlarmType.Rtc, calendar.TimeInMillis, AlarmManager.IntervalDay, pendingRefreshIntent);
         }
     }
 }
