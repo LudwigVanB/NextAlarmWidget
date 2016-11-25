@@ -14,7 +14,11 @@ namespace NextAlarmWidget
         public static void Update(Context context)
         {
             var nextAlarm = NextAlarm.ObtainFromSystem(context);
+            Update(context, nextAlarm);
+        }
 
+        public static void Update(Context context, NextAlarm nextAlarm)
+        {
             RemoteViews updateViews = new RemoteViews(context.PackageName, Resource.Layout.widget);
             updateViews.SetTextViewText(Resource.Id.alarm_date, nextAlarm.Day);
             if (nextAlarm.Time.Length > 5)
@@ -29,8 +33,8 @@ namespace NextAlarmWidget
                 updateViews.SetViewVisibility(Resource.Id.alarm_time_24, ViewStates.Visible);
                 updateViews.SetViewVisibility(Resource.Id.alarm_time_12, ViewStates.Gone);
             }
-            
-            updateViews.SetOnClickPendingIntent(Resource.Id.widget_root, nextAlarm.Intent);
+
+            updateViews.SetOnClickPendingIntent(Resource.Id.widget_root, nextAlarm.RelayIntent);
 
             ComponentName thisWidget = new ComponentName(context, Java.Lang.Class.FromType(typeof(Widget)).Name);
             AppWidgetManager manager = AppWidgetManager.GetInstance(context);
@@ -42,7 +46,7 @@ namespace NextAlarmWidget
             Calendar calendar = Calendar.GetInstance(Locale.Default);
             calendar.TimeInMillis = JavaSystem.CurrentTimeMillis();
             calendar.Set(CalendarField.HourOfDay, 0);
-            calendar.Set(CalendarField.Minute, 01);                
+            calendar.Set(CalendarField.Minute, 01);
             AlarmManager alarmManager = (AlarmManager)context.GetSystemService(Context.AlarmService);
             alarmManager.SetRepeating(AlarmType.Rtc, calendar.TimeInMillis, AlarmManager.IntervalDay, pendingRefreshIntent);
         }

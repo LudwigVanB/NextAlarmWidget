@@ -13,7 +13,10 @@ namespace NextAlarmWidget
 
         public string Time { get; private set; }
         public string Day { get; private set; }
-        public PendingIntent Intent { get; private set;  }
+        public PendingIntent RelayIntent { get; private set; }
+
+        private PendingIntent _systemIntent;
+
 
         public static NextAlarm ObtainFromSystem(Context context)
         {
@@ -44,7 +47,6 @@ namespace NextAlarmWidget
                 else
                 {
                     var diffInDays = (alarmDateTime.Date - nowDate.Date).Days;
-                    Log.Debug(TAG, "diffInDays= " + diffInDays);
                     if (diffInDays == 1)
                     {
                         nextAlarm.Day = context.GetString(Resource.String.tomorrow_abbreviation);
@@ -65,24 +67,29 @@ namespace NextAlarmWidget
 
                 if (alarmInfo.ShowIntent != null)
                 {
-                    nextAlarm.Intent = alarmInfo.ShowIntent;
+                    nextAlarm._systemIntent = alarmInfo.ShowIntent;
                 }
                 else
                 {
-                    nextAlarm.Intent = BuildShowAlarmsIntent(context);
+                    nextAlarm._systemIntent = BuildShowAlarmsSystemIntent(context);
                 }
             }
             else
             {
                 nextAlarm.Day = "zzz";
                 nextAlarm.Time = "--:--";                
-                nextAlarm.Intent = BuildShowAlarmsIntent(context);
+                nextAlarm._systemIntent = BuildShowAlarmsSystemIntent(context);
             }
+
+            var relayIntent = new Intent(context, typeof(AlarmRelayService));
+            nextAlarm.RelayIntent = PendingIntent.GetService(context, 0, relayIntent, PendingIntentFlags.UpdateCurrent);
+            //var relayIntent = new Intent(context, typeof(AlarmRelayActivity));
+            //nextAlarm.RelayIntent = PendingIntent.GetActivity(context, 0, relayIntent, PendingIntentFlags.UpdateCurrent);          
 
             return nextAlarm;
         }
 
-        private static PendingIntent BuildShowAlarmsIntent(Context context)
+        private static PendingIntent BuildShowAlarmsSystemIntent(Context context)
         {
             Intent openClockIntent = new Intent(AlarmClock.ActionShowAlarms);
             return PendingIntent.GetActivity(context, 0, openClockIntent, PendingIntentFlags.UpdateCurrent);
@@ -92,6 +99,11 @@ namespace NextAlarmWidget
         {
             var unixStartDate = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             return unixStartDate.AddMilliseconds(utcDate).ToLocalTime();
+        }
+
+        public void Show()
+        {
+            _systemIntent.Send();
         }
     }
 }

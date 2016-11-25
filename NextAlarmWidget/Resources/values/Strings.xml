@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>    
-  <string name="ApplicationName" tranlatable="false">AlarmWidget</string>
+  <string name="ApplicationName" tranlatable="false">Alarm Display Widget</string>
   <string name="widget_name">Next Alarm</string>
   <string name="today_abbreviation">Tod.</string>
   <string name="tomorrow_abbreviation">Tom.</string>
