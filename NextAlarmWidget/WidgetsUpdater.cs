@@ -40,15 +40,17 @@ namespace NextAlarmWidget
             AppWidgetManager manager = AppWidgetManager.GetInstance(context);
             manager.UpdateAppWidget(thisWidget, updateViews);
 
-
             var refreshIntent = new Intent(context, typeof(AlarmClockChangedReceiver));
             PendingIntent pendingRefreshIntent = PendingIntent.GetBroadcast(context, 0, refreshIntent, PendingIntentFlags.UpdateCurrent);
+            
             Calendar calendar = Calendar.GetInstance(Locale.Default);
             calendar.TimeInMillis = JavaSystem.CurrentTimeMillis();
             calendar.Set(CalendarField.HourOfDay, 0);
-            calendar.Set(CalendarField.Minute, 01);
+            calendar.Set(CalendarField.Minute, 0);
+            calendar.Add(CalendarField.DayOfYear, 1);
+
             AlarmManager alarmManager = (AlarmManager)context.GetSystemService(Context.AlarmService);
-            alarmManager.SetRepeating(AlarmType.Rtc, calendar.TimeInMillis, AlarmManager.IntervalDay, pendingRefreshIntent);
+            alarmManager.Set(AlarmType.Rtc, calendar.TimeInMillis, pendingRefreshIntent);
         }
     }
 }

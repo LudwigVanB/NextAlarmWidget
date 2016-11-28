@@ -10,10 +10,17 @@ namespace NextAlarmWidget
     })]
     public class AlarmClockChangedReceiver : BroadcastReceiver
     {
+        private static int _nbCalled = 0;
+
         public override void OnReceive(Context context, Intent intent)
-        {
-            //Toast.MakeText(context, "Received intent! " + intent.Action + intent.Component.ClassName, ToastLength.Short).Show();
-            WidgetsUpdater.Update(context);            
+        {            
+            WidgetsUpdater.Update(context);
+#if DEBUG
+            _nbCalled++;
+            var toastMessage = string.Format("Received intent! action={0} className={1} nbCalled={2}",
+                 intent.Action, intent.Component.ClassName, _nbCalled);
+            Toast.MakeText(context, toastMessage, ToastLength.Long).Show();
+#endif
         }
     }
 }
