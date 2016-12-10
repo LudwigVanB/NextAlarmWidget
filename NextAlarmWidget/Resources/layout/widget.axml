@@ -37,59 +37,11 @@
             android:gravity="right" />
     </LinearLayout>
     <ImageView
-        android:translationZ="-10dp"
+        android:id="@+id/alarm_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/box"
         android:layout_alignTop="@id/box"
         android:padding="5dp"
         android:src="@drawable/ic_alarm_white_18dp" />
-<!--
-  <GridLayout xmlns:grid="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@drawable/widget_background"
-        android:rowCount="3"
-        android:columnCount="2"
-        android:padding="5dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_alarm_white_18dp"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:layout_gravity="center_vertical" />
-        <TextView
-            android:id="@+id/alarm_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tom."
-            android:layout_row="0"
-            android:layout_column="1"
-            android:layout_gravity="right" />
-        <TextView
-            android:id="@+id/alarm_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="12:44 PM"
-            android:textSize="16dp"
-            android:textColor="#ffffff"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:gravity="right"
-            android:layout_columnSpan="2" />
-        <TextView
-            android:id="@+id/alarm_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Very long Alarm Name"
-            android:textSize="10dp"
-            android:maxLines="1"
-            android:layout_row="2"
-            android:layout_column="0"
-            android:layout_columnSpan="2"
-            android:gravity="right"
-            android:ellipsize="end" />
-    </GridLayout>-->
 </RelativeLayout>

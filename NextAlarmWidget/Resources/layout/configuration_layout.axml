@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <GridLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:useDefaultMargins="true"
+        android:id="@+id/gridLayout1">
+        <TextView
+            android:text="@string/background_color"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <monodroid.colorpickers.ColorPickerPanelView
+            android:id="@+id/backround_picker"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="right" />
+        <TextView
+            android:text="@string/time_color"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <monodroid.colorpickers.ColorPickerPanelView
+            android:id="@+id/time_picker"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="right" />
+        <TextView
+            android:text="@string/date_color"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <monodroid.colorpickers.ColorPickerPanelView
+            android:id="@+id/date_picker"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="right" />
+        <TextView
+            android:text="@string/icon_color"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <monodroid.colorpickers.ColorPickerPanelView
+            android:id="@+id/icon_picker"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="right" />
+        <Button
+            android:text="@string/create_widget"
+            android:id="@+id/ok_button"
+            android:layout_columnSpan="2"
+            android:layout_gravity="center_horizontal" />
+    </GridLayout>
+</LinearLayout>

@@ -69,6 +69,13 @@
   <ItemGroup>
     <Compile Include="AlarmClockChangedReceiver.cs" />
     <Compile Include="AlarmRelayService.cs" />
+    <Compile Include="ConfigurationActivity.cs" />
+    <Compile Include="MonoDroid.ColorPickers\AlphaPatternDrawable.cs" />
+    <Compile Include="MonoDroid.ColorPickers\ColorChangedEventArgs.cs" />
+    <Compile Include="MonoDroid.ColorPickers\ColorPickerDialog.cs" />
+    <Compile Include="MonoDroid.ColorPickers\ColorPickerPanelView.cs" />
+    <Compile Include="MonoDroid.ColorPickers\ColorPickerView.cs" />
+    <Compile Include="MonoDroid.ColorPickers\ColorUtils.cs" />
     <Compile Include="NextAlarm.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +88,10 @@
     <AndroidResource Include="Resources\layout\widget.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\configuration_layout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\dialog_color_picker.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml">
@@ -139,12 +150,11 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\mipmap-hdpi\" />
-    <Folder Include="Resources\mipmap-mdpi\" />
-    <Folder Include="Resources\mipmap-xhdpi\" />
-    <Folder Include="Resources\mipmap-xxhdpi\" />
-    <Folder Include="Resources\mipmap-xxxhdpi\" />
+    <AndroidResource Include="Resources\values\Colors.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

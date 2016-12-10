@@ -11,7 +11,7 @@ namespace NextAlarmWidget
     {
         public override void OnUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
         {
-            WidgetsUpdater.Update(context);
+            WidgetsUpdater.Update(context, appWidgetIds);
         }
     }
 }

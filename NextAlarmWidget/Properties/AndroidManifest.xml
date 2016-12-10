@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.sebcano.NextAlarmWidget" android:versionCode="2" android:versionName="0.2" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.sebcano.NextAlarmWidget" android:versionName="0.3" android:installLocation="auto" android:versionCode="3">
 	<uses-sdk android:minSdkVersion="21" />
 	<uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 	<application android:label="@string/ApplicationName" android:icon="@drawable/ic_launcher"></application>

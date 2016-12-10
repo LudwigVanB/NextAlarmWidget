@@ -41,6 +41,31 @@ namespace NextAlarmWidget
 			}
 		}
 		
+		public partial class Color
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int background = 2131034112;
+			
+			// aapt resource value: 0x7f050002
+			public const int date = 2131034114;
+			
+			// aapt resource value: 0x7f050003
+			public const int icon = 2131034115;
+			
+			// aapt resource value: 0x7f050001
+			public const int time = 2131034113;
+			
+			static Color()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Color()
+			{
+			}
+		}
+		
 		public partial class Drawable
 		{
 			
@@ -69,20 +94,50 @@ namespace NextAlarmWidget
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060002
-			public const int alarm_date = 2131099650;
+			// aapt resource value: 0x7f07000b
+			public const int alarm_date = 2131165195;
 			
-			// aapt resource value: 0x7f060004
-			public const int alarm_time_12 = 2131099652;
+			// aapt resource value: 0x7f07000e
+			public const int alarm_icon = 2131165198;
 			
-			// aapt resource value: 0x7f060003
-			public const int alarm_time_24 = 2131099651;
+			// aapt resource value: 0x7f07000d
+			public const int alarm_time_12 = 2131165197;
 			
-			// aapt resource value: 0x7f060001
-			public const int box = 2131099649;
+			// aapt resource value: 0x7f07000c
+			public const int alarm_time_24 = 2131165196;
 			
-			// aapt resource value: 0x7f060000
-			public const int widget_root = 2131099648;
+			// aapt resource value: 0x7f070001
+			public const int backround_picker = 2131165185;
+			
+			// aapt resource value: 0x7f07000a
+			public const int box = 2131165194;
+			
+			// aapt resource value: 0x7f070006
+			public const int color_picker_view = 2131165190;
+			
+			// aapt resource value: 0x7f070003
+			public const int date_picker = 2131165187;
+			
+			// aapt resource value: 0x7f070000
+			public const int gridLayout1 = 2131165184;
+			
+			// aapt resource value: 0x7f070004
+			public const int icon_picker = 2131165188;
+			
+			// aapt resource value: 0x7f070008
+			public const int new_color_panel = 2131165192;
+			
+			// aapt resource value: 0x7f070005
+			public const int ok_button = 2131165189;
+			
+			// aapt resource value: 0x7f070007
+			public const int old_color_panel = 2131165191;
+			
+			// aapt resource value: 0x7f070002
+			public const int time_picker = 2131165186;
+			
+			// aapt resource value: 0x7f070009
+			public const int widget_root = 2131165193;
 			
 			static Id()
 			{
@@ -98,7 +153,13 @@ namespace NextAlarmWidget
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int widget = 2130903040;
+			public const int configuration_layout = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int dialog_color_picker = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int widget = 2130903042;
 			
 			static Layout()
 			{
@@ -113,17 +174,41 @@ namespace NextAlarmWidget
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int ApplicationName = 2131034112;
+			// aapt resource value: 0x7f060000
+			public const int ApplicationName = 2131099648;
 			
-			// aapt resource value: 0x7f050002
-			public const int today_abbreviation = 2131034114;
+			// aapt resource value: 0x7f060005
+			public const int background_color = 2131099653;
 			
-			// aapt resource value: 0x7f050003
-			public const int tomorrow_abbreviation = 2131034115;
+			// aapt resource value: 0x7f060009
+			public const int create_widget = 2131099657;
 			
-			// aapt resource value: 0x7f050001
-			public const int widget_name = 2131034113;
+			// aapt resource value: 0x7f060007
+			public const int date_color = 2131099655;
+			
+			// aapt resource value: 0x7f06000a
+			public const int dialog_color_picker = 2131099658;
+			
+			// aapt resource value: 0x7f060008
+			public const int icon_color = 2131099656;
+			
+			// aapt resource value: 0x7f06000b
+			public const int press_color_to_apply = 2131099659;
+			
+			// aapt resource value: 0x7f060004
+			public const int settings = 2131099652;
+			
+			// aapt resource value: 0x7f060006
+			public const int time_color = 2131099654;
+			
+			// aapt resource value: 0x7f060002
+			public const int today_abbreviation = 2131099650;
+			
+			// aapt resource value: 0x7f060003
+			public const int tomorrow_abbreviation = 2131099651;
+			
+			// aapt resource value: 0x7f060001
+			public const int widget_name = 2131099649;
 			
 			static String()
 			{

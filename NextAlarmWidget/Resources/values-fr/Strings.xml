@@ -3,4 +3,13 @@
   <string name="widget_name">Prochaine Alarme</string>
   <string name="today_abbreviation">Auj.</string>
   <string name="tomorrow_abbreviation">Dem.</string>
+  <string name="settings">Configuration</string>
+  <string name="background_color">Fond:</string>
+  <string name="time_color">Heure:</string>
+  <string name="date_color">Date:</string>
+  <string name="icon_color">Icône:</string>
+  <string name="create_widget">Créer widget</string>
+
+  <string name="dialog_color_picker">Choix de couleur</string>
+  <string name="press_color_to_apply">Appuyer sur la couleur pour la sélectionner</string>
 </resources>

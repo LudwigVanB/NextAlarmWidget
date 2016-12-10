@@ -2,6 +2,7 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:minWidth="40dip"
     android:minHeight="40dip"
+    android:configure="com.sebcano.nextalarmwidget.ConfigurationActivity"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="0"
     android:initialLayout="@layout/widget"
