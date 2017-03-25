@@ -49,14 +49,14 @@ namespace NextAlarmWidget
                     updateViews.SetViewVisibility(Resource.Id.alarm_time_12, ViewStates.Gone);
                 }
 
-                var dateColor = new Color(prefs.GetInt("dateColor" + appWidgetId, context.GetColor(Resource.Color.date)));
+                var dateColor = new Color(prefs.GetInt("dateColor" + appWidgetId, context.GetCompatColor(Resource.Color.date)));
                 updateViews.SetTextColor(Resource.Id.alarm_date, dateColor);
 
-                var timeColor = new Color( prefs.GetInt("timeColor" + appWidgetId, context.GetColor(Resource.Color.time)) );
+                var timeColor = new Color( prefs.GetInt("timeColor" + appWidgetId, context.GetCompatColor(Resource.Color.time)) );
                 updateViews.SetTextColor(Resource.Id.alarm_time_24, timeColor);
                 updateViews.SetTextColor(Resource.Id.alarm_time_12, timeColor);
 
-                var iconColor = new Color(prefs.GetInt("iconColor" + appWidgetId, context.GetColor(Resource.Color.icon)));
+                var iconColor = new Color(prefs.GetInt("iconColor" + appWidgetId, context.GetCompatColor(Resource.Color.icon)));
                 Bitmap sourceBitmap = BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.ic_alarm_white_18dp);
                 Bitmap resultBitmap = Bitmap.CreateBitmap(sourceBitmap.Width, sourceBitmap.Height, Bitmap.Config.Argb8888);
                 Paint p = new Paint();
@@ -70,7 +70,7 @@ namespace NextAlarmWidget
                 canvas.DrawBitmap(sourceBitmap, 0, 0, p);
                 updateViews.SetImageViewBitmap(Resource.Id.alarm_icon, resultBitmap);
                 
-                var backgroundColor = new Color(prefs.GetInt("backgroundColor" + appWidgetId, context.GetColor(Resource.Color.background)));
+                var backgroundColor = new Color(prefs.GetInt("backgroundColor" + appWidgetId, context.GetCompatColor(Resource.Color.background)));
                 try
                 {
                     IntPtr cls = JNIEnv.FindClass("android/widget/RemoteViews");

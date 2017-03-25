@@ -26,7 +26,7 @@ namespace NextAlarmWidget
         {
             _savekey = saveKey;
             _colorPicker = activity.FindViewById<ColorPickerPanelView>(idPicker);
-            _colorPicker.Color = new Color( activity.GetColor(idDefaultColor) );
+            _colorPicker.Color = new Color( activity.GetCompatColor( idDefaultColor ) );
             _colorPicker.PanelClicked += (sender, e) =>
             {
                 var colorPickerDialog = new ColorPickerDialog(activity, _colorPicker.Color);

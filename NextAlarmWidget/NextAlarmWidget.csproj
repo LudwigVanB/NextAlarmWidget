@@ -70,6 +70,7 @@
     <Compile Include="AlarmClockChangedReceiver.cs" />
     <Compile Include="AlarmRelayService.cs" />
     <Compile Include="ConfigurationActivity.cs" />
+    <Compile Include="ContextCompat.cs" />
     <Compile Include="MonoDroid.ColorPickers\AlphaPatternDrawable.cs" />
     <Compile Include="MonoDroid.ColorPickers\ColorChangedEventArgs.cs" />
     <Compile Include="MonoDroid.ColorPickers\ColorPickerDialog.cs" />
