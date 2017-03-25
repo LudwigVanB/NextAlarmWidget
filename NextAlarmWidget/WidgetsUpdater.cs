@@ -30,7 +30,7 @@ namespace NextAlarmWidget
             {
                 appWidgetIds = appWidgetManager.GetAppWidgetIds(thisWidget);
             }
-            var prefs = context.GetSharedPreferences("com.sebcano.NextAlarmWidget.widget_prefs", FileCreationMode.Private);
+            var prefs = PrefsKeys.GetPrefs(context);
 
             foreach (var appWidgetId in appWidgetIds)
             {
@@ -49,14 +49,23 @@ namespace NextAlarmWidget
                     updateViews.SetViewVisibility(Resource.Id.alarm_time_12, ViewStates.Gone);
                 }
 
-                var dateColor = new Color(prefs.GetInt("dateColor" + appWidgetId, context.GetCompatColor(Resource.Color.date)));
+                var dateColor = new Color(prefs.GetInt(PrefsKeys.DateColor + appWidgetId, context.GetCompatColor(Resource.Color.date)));
                 updateViews.SetTextColor(Resource.Id.alarm_date, dateColor);
+                var dateTextSize = prefs.GetInt(PrefsKeys.DateTextSize + appWidgetId, -1);
+                if (dateTextSize != - 1)
+                    updateViews.SetTextViewTextSize(Resource.Id.alarm_date, (int)ComplexUnitType.Dip, dateTextSize);
 
-                var timeColor = new Color( prefs.GetInt("timeColor" + appWidgetId, context.GetCompatColor(Resource.Color.time)) );
+
+                var timeColor = new Color( prefs.GetInt(PrefsKeys.TimeColor + appWidgetId, context.GetCompatColor(Resource.Color.time)) );
                 updateViews.SetTextColor(Resource.Id.alarm_time_24, timeColor);
                 updateViews.SetTextColor(Resource.Id.alarm_time_12, timeColor);
 
-                var iconColor = new Color(prefs.GetInt("iconColor" + appWidgetId, context.GetCompatColor(Resource.Color.icon)));
+                var timeTextSize = prefs.GetInt(PrefsKeys.TimeTextSize + appWidgetId, -1);
+                if (timeTextSize != -1)
+                    updateViews.SetTextViewTextSize(Resource.Id.alarm_time_24, (int)ComplexUnitType.Dip, timeTextSize);
+                    updateViews.SetTextViewTextSize(Resource.Id.alarm_time_12, (int)ComplexUnitType.Dip, timeTextSize);
+
+                var iconColor = new Color(prefs.GetInt(PrefsKeys.IconColor + appWidgetId, context.GetCompatColor(Resource.Color.icon)));
                 Bitmap sourceBitmap = BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.ic_alarm_white_18dp);
                 Bitmap resultBitmap = Bitmap.CreateBitmap(sourceBitmap.Width, sourceBitmap.Height, Bitmap.Config.Argb8888);
                 Paint p = new Paint();
@@ -70,7 +79,7 @@ namespace NextAlarmWidget
                 canvas.DrawBitmap(sourceBitmap, 0, 0, p);
                 updateViews.SetImageViewBitmap(Resource.Id.alarm_icon, resultBitmap);
                 
-                var backgroundColor = new Color(prefs.GetInt("backgroundColor" + appWidgetId, context.GetCompatColor(Resource.Color.background)));
+                var backgroundColor = new Color(prefs.GetInt(PrefsKeys.BackgroundColor + appWidgetId, context.GetCompatColor(Resource.Color.background)));
                 try
                 {
                     IntPtr cls = JNIEnv.FindClass("android/widget/RemoteViews");

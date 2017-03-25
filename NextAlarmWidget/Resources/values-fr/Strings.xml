@@ -6,9 +6,12 @@
   <string name="settings">Configuration</string>
   <string name="background_color">Fond:</string>
   <string name="time_color">Heure:</string>
+  <string name="time_size">Taille heure:</string>
   <string name="date_color">Date:</string>
+  <string name="date_size">Taille date:</string>
   <string name="icon_color">Icône:</string>
   <string name="create_widget">Créer widget</string>
+  <string name="default_values">Réinitialiser</string>
 
   <string name="dialog_color_picker">Choix de couleur</string>
   <string name="press_color_to_apply">Appuyer sur la couleur pour la sélectionner</string>

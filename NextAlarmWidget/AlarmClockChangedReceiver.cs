@@ -10,7 +10,9 @@ namespace NextAlarmWidget
     })]
     public class AlarmClockChangedReceiver : BroadcastReceiver
     {
+#if DEBUG
         private static int _nbCalled = 0;
+#endif
 
         public override void OnReceive(Context context, Intent intent)
         {            
