@@ -83,8 +83,6 @@ namespace NextAlarmWidget
 
             var relayIntent = new Intent(context, typeof(AlarmRelayService));
             nextAlarm.RelayIntent = PendingIntent.GetService(context, 0, relayIntent, PendingIntentFlags.UpdateCurrent);
-            //var relayIntent = new Intent(context, typeof(AlarmRelayActivity));
-            //nextAlarm.RelayIntent = PendingIntent.GetActivity(context, 0, relayIntent, PendingIntentFlags.UpdateCurrent);          
 
             return nextAlarm;
         }
