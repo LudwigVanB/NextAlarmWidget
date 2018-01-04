@@ -19,6 +19,7 @@ namespace NextAlarmWidget
         public const string IconColor = "iconColor";
         public const string TimeTextSize = "timeTextSize";
         public const string DateTextSize = "dateTextSize";
+        public const string DateUseTodTom = "dateUseTodTom";
 
         public const string DefaultValue = "_defaultValue";
 
@@ -34,6 +35,7 @@ namespace NextAlarmWidget
         int _widgetId;
         ColorSetting[] _tbColorSettings;
         SizeSetting[] _tbSizeSettings;
+        BoolSetting[] _tbBoolSettings;
         
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -54,6 +56,11 @@ namespace NextAlarmWidget
             {
                 new SizeSetting(this, Resource.Id.time_textsize, PrefsKeys.TimeTextSize),
                 new SizeSetting(this, Resource.Id.date_textsize, PrefsKeys.DateTextSize)
+            };
+
+            _tbBoolSettings = new BoolSetting[]
+            {
+                new BoolSetting(this, Resource.Id.date_usetodtom, PrefsKeys.DateUseTodTom)
             };
 
             Bundle extras = Intent.Extras;
@@ -77,6 +84,8 @@ namespace NextAlarmWidget
                 colorSetting.Save(editor, _widgetId);
             foreach (var sizeSetting in _tbSizeSettings)
                 sizeSetting.Save(editor, _widgetId);
+            foreach (var boolSetting in _tbBoolSettings)
+                boolSetting.Save(editor, _widgetId);
 
             editor.Commit();
 
@@ -94,6 +103,8 @@ namespace NextAlarmWidget
                 colorSetting.ResetDefault();
             foreach (var sizeSetting in _tbSizeSettings)
                 sizeSetting.ResetDefault();
+            foreach (var boolSetting in _tbBoolSettings)
+                boolSetting.ResetDefault();
         }
     }
 
@@ -172,6 +183,36 @@ namespace NextAlarmWidget
         public void ResetDefault()
         {
             _editText.Text = "";
+        }
+    }
+
+    class BoolSetting
+    {
+        CheckBox _checkBox;
+        string _savekey;
+
+        public BoolSetting(Activity activity, int idCheckBox, string saveKey)
+        {
+            _savekey = saveKey;
+            using (var prefs = PrefsKeys.GetPrefs(activity))
+            {
+                _checkBox = activity.FindViewById<CheckBox>(idCheckBox);
+                var defaultValue = prefs.GetBoolean(_savekey + PrefsKeys.DefaultValue, true);
+                _checkBox.Checked = defaultValue;                
+            }
+        }
+
+        public void Save(ISharedPreferencesEditor editor, int appWidgetId)
+        {
+            Log.Debug("saving", _savekey + appWidgetId);
+            var boolValue = _checkBox.Checked;
+            editor.PutBoolean(_savekey + appWidgetId, boolValue);
+            editor.PutBoolean(_savekey + PrefsKeys.DefaultValue, boolValue);
+        }
+
+        public void ResetDefault()
+        {
+            _checkBox.Checked = true;
         }
     }
 }

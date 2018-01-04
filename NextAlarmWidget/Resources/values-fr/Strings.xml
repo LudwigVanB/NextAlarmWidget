@@ -9,6 +9,7 @@
   <string name="time_size">Taille heure:</string>
   <string name="date_color">Date:</string>
   <string name="date_size">Taille date:</string>
+  <string name="date_use_tod_tom">Utiliser Auj./Dem.:</string>
   <string name="icon_color">Icône:</string>
   <string name="create_widget">Créer widget</string>
   <string name="default_values">Réinitialiser</string>

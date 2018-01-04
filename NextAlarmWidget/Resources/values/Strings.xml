@@ -10,6 +10,7 @@
   <string name="time_size">Time size:</string>
   <string name="date_color">Date:</string>
   <string name="date_size">Date size:</string>
+  <string name="date_use_tod_tom">Use Tod./Tom.:</string>
   <string name="icon_color">Icon:</string>
   <string name="create_widget">Create widget</string>
   <string name="default_values">Reset</string>

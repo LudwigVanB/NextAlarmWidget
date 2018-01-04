@@ -35,7 +35,15 @@ namespace NextAlarmWidget
             foreach (var appWidgetId in appWidgetIds)
             {
                 RemoteViews updateViews = new RemoteViews(context.PackageName, Resource.Layout.widget);
-                updateViews.SetTextViewText(Resource.Id.alarm_date, nextAlarm.Day);
+                var useTodDom = prefs.GetBoolean(PrefsKeys.DateUseTodTom + appWidgetId, true);
+                if (useTodDom)
+                {
+                    updateViews.SetTextViewText(Resource.Id.alarm_date, nextAlarm.DayAbbreviated);
+                }
+                else
+                {
+                    updateViews.SetTextViewText(Resource.Id.alarm_date, nextAlarm.Day);
+                }
                 if (nextAlarm.Time.Length > 5)
                 {
                     updateViews.SetTextViewText(Resource.Id.alarm_time_12, nextAlarm.Time);

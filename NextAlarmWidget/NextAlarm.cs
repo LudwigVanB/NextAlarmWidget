@@ -16,6 +16,7 @@ namespace NextAlarmWidget
 
         public string Time { get; private set; }
         public string Day { get; private set; }
+        public string DayAbbreviated { get; private set; }
         public PendingIntent RelayIntent { get; private set; }
 
         private PendingIntent _showAlarmIntent;
@@ -44,30 +45,28 @@ namespace NextAlarmWidget
                 }
 
                 var nowDate = DateTime.Now;
-                if (nowDate.Date == alarmDateTime.Date)
+                var diffInDays = (alarmDateTime.Date - nowDate.Date).Days;
+                if (diffInDays <7)
                 {
-                    nextAlarm.Day = context.GetString(Resource.String.today_abbreviation);
+                    nextAlarm.Day = alarmDateTime.ToString("ddd");
+                    if (!nextAlarm.Day.EndsWith("."))
+                    {
+                        nextAlarm.Day += ".";
+                    }
                 }
                 else
                 {
-                    var diffInDays = (alarmDateTime.Date - nowDate.Date).Days;
-                    if (diffInDays == 1)
-                    {
-                        nextAlarm.Day = context.GetString(Resource.String.tomorrow_abbreviation);
-                    }
-                    else if (diffInDays < 7)
-                    {
-                        nextAlarm.Day = alarmDateTime.ToString("ddd");
-                        if (!nextAlarm.Day.EndsWith("."))
-                        {
-                            nextAlarm.Day += ".";
-                        }
-                    }
-                    else
-                    {
-                        nextAlarm.Day = alarmDateTime.ToString("d");
-                    }
+                    nextAlarm.Day = alarmDateTime.ToString("d");
                 }
+                nextAlarm.DayAbbreviated = nextAlarm.Day;
+                if (nowDate.Date == alarmDateTime.Date)
+                {
+                    nextAlarm.DayAbbreviated = context.GetString(Resource.String.today_abbreviation);
+                }
+                else if(diffInDays == 1)
+                {
+                    nextAlarm.DayAbbreviated = context.GetString(Resource.String.tomorrow_abbreviation);
+                }                
 
                 if (alarmInfo.ShowIntent != null)
                 {

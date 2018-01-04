@@ -5,83 +5,88 @@
     android:layout_height="wrap_content"
     android:minWidth="25px"
     android:minHeight="25px">
-  <GridLayout
-      android:minWidth="25px"
-      android:minHeight="25px"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:columnCount="2"
-      android:useDefaultMargins="true"
-      android:id="@+id/gridLayout1">
-    <TextView
-        android:text="@string/background_color"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    <monodroid.colorpickers.ColorPickerPanelView
-        android:id="@+id/backround_picker"
-        android:layout_width="200dp"
-        android:layout_height="25dp"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="right" />
-    <TextView
-        android:text="@string/time_color"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    <monodroid.colorpickers.ColorPickerPanelView
-        android:id="@+id/time_picker"
-        android:layout_width="200dp"
-        android:layout_height="25dp"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="right" />
-    <TextView
-        android:text="@string/time_size"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    <EditText
-        android:id="@+id/time_textsize"
-        android:inputType="number"
-        android:layout_gravity="right"/>
-    <TextView
-        android:text="@string/date_color"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    <monodroid.colorpickers.ColorPickerPanelView
-        android:id="@+id/date_picker"
-        android:layout_width="200dp"
-        android:layout_height="25dp"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="right" />
-    <TextView
-        android:text="@string/date_size"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    <EditText
-        android:id="@+id/date_textsize"
-        android:inputType="number"
-        android:layout_gravity="right"/>
-    <TextView
-        android:text="@string/icon_color"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    <monodroid.colorpickers.ColorPickerPanelView
-        android:id="@+id/icon_picker"
-        android:layout_width="200dp"
-        android:layout_height="25dp"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="right" />
-    <LinearLayout
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
+    <GridLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_columnSpan="2" >
-      <Button
+        android:columnCount="2"
+        android:useDefaultMargins="true"
+        android:id="@+id/gridLayout1">
+        <TextView
+            android:text="@string/background_color"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <monodroid.colorpickers.ColorPickerPanelView
+            android:id="@+id/backround_picker"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="right" />
+        <TextView
+            android:text="@string/time_color"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <monodroid.colorpickers.ColorPickerPanelView
+            android:id="@+id/time_picker"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="right" />
+        <TextView
+            android:text="@string/time_size"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <EditText
+            android:id="@+id/time_textsize"
+            android:inputType="number"
+            android:layout_gravity="right" />
+        <TextView
+            android:text="@string/date_color"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <monodroid.colorpickers.ColorPickerPanelView
+            android:id="@+id/date_picker"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="right" />
+        <TextView
+            android:text="@string/date_size"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <EditText
+            android:id="@+id/date_textsize"
+            android:inputType="number"
+            android:layout_gravity="right" />
+        <TextView
+            android:text="@string/date_use_tod_tom"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <CheckBox
+            android:id="@+id/date_usetodtom"
+            android:layout_gravity="right" />
+        <TextView
+            android:text="@string/icon_color"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <monodroid.colorpickers.ColorPickerPanelView
+            android:id="@+id/icon_picker"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="right" />
+        <LinearLayout
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create_widget"
-            android:id="@+id/ok_button"
-            android:layout_gravity="center_horizontal" />
-      <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/default_values"
-            android:id="@+id/default_button"
-            android:layout_gravity="center_horizontal" />
-    </LinearLayout>
-
-  </GridLayout>
+            android:orientation="horizontal"
+            android:layout_columnSpan="2">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create_widget"
+                android:id="@+id/ok_button"
+                android:layout_gravity="center_horizontal" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_values"
+                android:id="@+id/default_button"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+    </GridLayout>
 </LinearLayout>
