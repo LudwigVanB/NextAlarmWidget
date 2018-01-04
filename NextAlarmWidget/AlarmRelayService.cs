@@ -19,7 +19,7 @@ namespace NextAlarmWidget
         protected override void OnHandleIntent(Intent intent)
         {
             var nextAlarm = NextAlarm.ObtainFromSystem(this);
-            nextAlarm.Show();
+            nextAlarm.Show(this);
             WidgetsUpdater.Update(this, nextAlarm);
         }
     }

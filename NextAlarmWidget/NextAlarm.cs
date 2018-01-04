@@ -4,6 +4,9 @@ using Android.App;
 using Android.Content;
 using Android.Util;
 using Android.Provider;
+using Android.Widget;
+using Android.OS;
+using Android.Runtime;
 
 namespace NextAlarmWidget
 {
@@ -15,7 +18,8 @@ namespace NextAlarmWidget
         public string Day { get; private set; }
         public PendingIntent RelayIntent { get; private set; }
 
-        private PendingIntent _systemIntent;
+        private PendingIntent _showAlarmIntent;
+        private PendingIntent _showAllAlarmsIntent;
 
 
         public static NextAlarm ObtainFromSystem(Context context)
@@ -67,19 +71,15 @@ namespace NextAlarmWidget
 
                 if (alarmInfo.ShowIntent != null)
                 {
-                    nextAlarm._systemIntent = alarmInfo.ShowIntent;
-                }
-                else
-                {
-                    nextAlarm._systemIntent = BuildShowAlarmsSystemIntent(context);
+                    nextAlarm._showAlarmIntent = alarmInfo.ShowIntent;
                 }
             }
             else
             {
                 nextAlarm.Day = "zzz";
                 nextAlarm.Time = "--:--";                
-                nextAlarm._systemIntent = BuildShowAlarmsSystemIntent(context);
             }
+            nextAlarm._showAllAlarmsIntent = BuildShowAlarmsSystemIntent(context);
 
             var relayIntent = new Intent(context, typeof(AlarmRelayService));
             nextAlarm.RelayIntent = PendingIntent.GetService(context, 0, relayIntent, PendingIntentFlags.UpdateCurrent);
@@ -99,9 +99,47 @@ namespace NextAlarmWidget
             return unixStartDate.AddMilliseconds(utcDate).ToLocalTime();
         }
 
-        public void Show()
+        public void Show(Context context)
         {
-            _systemIntent.Send();
+            if (_showAlarmIntent != null)
+            {
+                HandlerThread handlerThread = new HandlerThread("Intent sending handler");
+                try
+                {
+                    handlerThread.Start();
+                    Looper looper = handlerThread.Looper;
+                    var finishedHandler = new OnFinished(context, _showAllAlarmsIntent, handlerThread);
+                    _showAlarmIntent.Send(Result.Ok, finishedHandler, new Handler(looper)); ;
+                }
+                catch (Exception)
+                {
+                    handlerThread.QuitSafely();
+                    _showAllAlarmsIntent.Send();
+                }
+            } else
+                _showAllAlarmsIntent.Send();
+        }
+
+        class OnFinished : Java.Lang.Object, PendingIntent.IOnFinished
+        {
+            private Context _context;
+            private PendingIntent _fallbackIntent;
+            private HandlerThread _handlerThread;
+
+            internal OnFinished(Context context, PendingIntent fallbackIntent, HandlerThread handlerThread)
+            {
+                _context = context;
+                _fallbackIntent = fallbackIntent;
+                _handlerThread = handlerThread;
+            }
+
+            public void OnSendFinished(PendingIntent pendingIntent, Intent intent, [GeneratedEnum] Result resultCode, string resultData, Bundle resultExtras)
+            {
+                var packageManager = _context.PackageManager;
+                if (intent.ResolveActivity(packageManager) == null)
+                    _fallbackIntent.Send();
+                _handlerThread.QuitSafely();                
+            }
         }
     }
 }
