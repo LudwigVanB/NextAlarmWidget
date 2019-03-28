@@ -75,7 +75,6 @@ namespace NextAlarmWidget
             }
             else
             {
-                nextAlarm.Day = "zzz";
                 nextAlarm.Time = "--:--";                
             }
             nextAlarm._showAllAlarmsIntent = BuildShowAlarmsSystemIntent(context);
