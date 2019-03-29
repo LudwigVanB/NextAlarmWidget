@@ -7,9 +7,6 @@ using Android.Graphics;
 using Java.Util;
 using Java.Lang;
 using Android.Util;
-using Android.Graphics.Drawables;
-using Android.Runtime;
-using System;
 
 namespace NextAlarmWidget
 {
@@ -25,7 +22,7 @@ namespace NextAlarmWidget
         public static void Update(Context context, NextAlarm nextAlarm, int[] appWidgetIds = null)
         {
             AppWidgetManager appWidgetManager = AppWidgetManager.GetInstance(context);
-            ComponentName thisWidget = new ComponentName(context, Java.Lang.Class.FromType(typeof(Widget)).Name);
+            ComponentName thisWidget = new ComponentName(context, Class.FromType(typeof(Widget)).Name);
             if (appWidgetIds == null)
             {
                 appWidgetIds = appWidgetManager.GetAppWidgetIds(thisWidget);
@@ -34,6 +31,9 @@ namespace NextAlarmWidget
 
             foreach (var appWidgetId in appWidgetIds)
             {
+                var timeOffset = prefs.GetInt(PrefsKeys.TimeOffset + appWidgetId, 0);
+                nextAlarm.RefreshDisplay(context, timeOffset);
+
                 RemoteViews updateViews = new RemoteViews(context.PackageName, Resource.Layout.widget);
                 var useTodDom = prefs.GetBoolean(PrefsKeys.DateUseTodTom + appWidgetId, true);
                 if (useTodDom)

@@ -14,6 +14,8 @@ namespace NextAlarmWidget
     {
         private const string TAG = "Widget.NextAlarm";
 
+        private DateTime? _alarmDateTime;
+
         public string Time { get; private set; }
         public string Day { get; private set; }
         public string DayAbbreviated { get; private set; }
@@ -23,6 +25,47 @@ namespace NextAlarmWidget
         private PendingIntent _showAllAlarmsIntent;
 
 
+        public void RefreshDisplay(Context context, int offsetMinutes)
+        {
+            if (! _alarmDateTime.HasValue) return;
+
+            var alarmDateTime = _alarmDateTime.Value.AddMinutes(offsetMinutes);
+
+            bool is24hFormat = Android.Text.Format.DateFormat.Is24HourFormat(context);
+            if (is24hFormat)
+            {
+                Time = alarmDateTime.ToString("H:mm");
+            }
+            else
+            {
+                Time = alarmDateTime.ToString("h:mm t");
+            }
+
+            var nowDate = DateTime.Now;
+            var diffInDays = (alarmDateTime.Date - nowDate.Date).Days;
+            if (diffInDays < 7)
+            {
+                Day = alarmDateTime.ToString("ddd");
+                if (!Day.EndsWith("."))
+                {
+                    Day += ".";
+                }
+            }
+            else
+            {
+                Day = alarmDateTime.ToString("d");
+            }
+            DayAbbreviated = Day;
+            if (nowDate.Date == alarmDateTime.Date)
+            {
+                DayAbbreviated = context.GetString(Resource.String.today_abbreviation);
+            }
+            else if (diffInDays == 1)
+            {
+                DayAbbreviated = context.GetString(Resource.String.tomorrow_abbreviation);
+            }
+        }
+
         public static NextAlarm ObtainFromSystem(Context context)
         {
             var nextAlarm = new NextAlarm();
@@ -31,42 +74,8 @@ namespace NextAlarmWidget
             var alarmInfo = alarmManager.NextAlarmClock;
             if (alarmInfo != null)
             {
-
                 long alarmUnixTime = alarmInfo.TriggerTime;
-                var alarmDateTime = UnixDateToLocalDateTime(alarmUnixTime);
-                bool is24hFormat = Android.Text.Format.DateFormat.Is24HourFormat(context);
-                if (is24hFormat)
-                {
-                    nextAlarm.Time = alarmDateTime.ToString("H:mm");
-                }
-                else
-                {
-                    nextAlarm.Time = alarmDateTime.ToString("h:mm t");
-                }
-
-                var nowDate = DateTime.Now;
-                var diffInDays = (alarmDateTime.Date - nowDate.Date).Days;
-                if (diffInDays <7)
-                {
-                    nextAlarm.Day = alarmDateTime.ToString("ddd");
-                    if (!nextAlarm.Day.EndsWith("."))
-                    {
-                        nextAlarm.Day += ".";
-                    }
-                }
-                else
-                {
-                    nextAlarm.Day = alarmDateTime.ToString("d");
-                }
-                nextAlarm.DayAbbreviated = nextAlarm.Day;
-                if (nowDate.Date == alarmDateTime.Date)
-                {
-                    nextAlarm.DayAbbreviated = context.GetString(Resource.String.today_abbreviation);
-                }
-                else if(diffInDays == 1)
-                {
-                    nextAlarm.DayAbbreviated = context.GetString(Resource.String.tomorrow_abbreviation);
-                }                
+                nextAlarm._alarmDateTime = UnixDateToLocalDateTime(alarmUnixTime);
 
                 if (alarmInfo.ShowIntent != null)
                 {

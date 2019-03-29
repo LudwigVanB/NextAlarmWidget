@@ -20,6 +20,7 @@ namespace NextAlarmWidget
         public const string TimeTextSize = "timeTextSize";
         public const string DateTextSize = "dateTextSize";
         public const string DateUseTodTom = "dateUseTodTom";
+        public const string TimeOffset = "timeOffset";
 
         public const string DefaultValue = "_defaultValue";
 
@@ -34,7 +35,7 @@ namespace NextAlarmWidget
     {
         int _widgetId;
         ColorSetting[] _tbColorSettings;
-        SizeSetting[] _tbSizeSettings;
+        IntSetting[] _tbIntSettings;
         BoolSetting[] _tbBoolSettings;
         
         protected override void OnCreate(Bundle savedInstanceState)
@@ -52,10 +53,11 @@ namespace NextAlarmWidget
                 new ColorSetting(this, Resource.Id.icon_picker, Resource.Color.icon, true, PrefsKeys.IconColor)
             };
 
-            _tbSizeSettings = new SizeSetting[]
+            _tbIntSettings = new IntSetting[]
             {
-                new SizeSetting(this, Resource.Id.time_textsize, PrefsKeys.TimeTextSize),
-                new SizeSetting(this, Resource.Id.date_textsize, PrefsKeys.DateTextSize)
+                new IntSetting(this, Resource.Id.time_textsize, PrefsKeys.TimeTextSize, -1),
+                new IntSetting(this, Resource.Id.date_textsize, PrefsKeys.DateTextSize, -1),
+                new IntSetting(this, Resource.Id.time_offset, PrefsKeys.TimeOffset, 0), 
             };
 
             _tbBoolSettings = new BoolSetting[]
@@ -82,8 +84,8 @@ namespace NextAlarmWidget
             var editor = prefs.Edit();
             foreach (var colorSetting in _tbColorSettings)
                 colorSetting.Save(editor, _widgetId);
-            foreach (var sizeSetting in _tbSizeSettings)
-                sizeSetting.Save(editor, _widgetId);
+            foreach (var intSetting in _tbIntSettings)
+                intSetting.Save(editor, _widgetId);
             foreach (var boolSetting in _tbBoolSettings)
                 boolSetting.Save(editor, _widgetId);
 
@@ -101,8 +103,8 @@ namespace NextAlarmWidget
         {
             foreach (var colorSetting in _tbColorSettings)
                 colorSetting.ResetDefault();
-            foreach (var sizeSetting in _tbSizeSettings)
-                sizeSetting.ResetDefault();
+            foreach (var intSetting in _tbIntSettings)
+                intSetting.ResetDefault();
             foreach (var boolSetting in _tbBoolSettings)
                 boolSetting.ResetDefault();
         }
@@ -151,32 +153,32 @@ namespace NextAlarmWidget
             _colorPicker.Color = defaultColor;
         }
     }
-
-    class SizeSetting
+    
+    class IntSetting
     {
         EditText _editText;
         string _savekey;
 
-        public SizeSetting(Activity activity, int idEdit, string saveKey)
+        public IntSetting(Activity activity, int idEdit, string saveKey, int defaultValue)
         {
             _savekey = saveKey;
             using (var prefs = PrefsKeys.GetPrefs(activity))
             {
                 _editText = activity.FindViewById<EditText>(idEdit);
-                var defaultSize = prefs.GetInt(_savekey + PrefsKeys.DefaultValue, -1);
-                if (defaultSize != -1)
-                    _editText.Text = defaultSize.ToString();
+                var savedValue = prefs.GetInt(_savekey + PrefsKeys.DefaultValue, defaultValue);
+                if (savedValue != defaultValue)
+                    _editText.Text = savedValue.ToString();
             }
         }
 
         public void Save(ISharedPreferencesEditor editor, int appWidgetId)
         {
             Log.Debug("saving", _savekey + appWidgetId);
-            int iNewSize;
-            if (int.TryParse(_editText.Text, out iNewSize))
+            int iNewValue;
+            if (int.TryParse(_editText.Text, out iNewValue))
             {
-                editor.PutInt(_savekey + appWidgetId, iNewSize);
-                editor.PutInt(_savekey + PrefsKeys.DefaultValue, iNewSize);
+                editor.PutInt(_savekey + appWidgetId, iNewValue);
+                editor.PutInt(_savekey + PrefsKeys.DefaultValue, iNewValue);
             }
         }
 

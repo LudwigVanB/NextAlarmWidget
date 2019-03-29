@@ -14,6 +14,7 @@
   <string name="icon_color">Icon:</string>
   <string name="create_widget">Create widget</string>
   <string name="default_values">Reset</string>
+  <string name="time_offset">Offset (minutes):</string>
   
   <string name="dialog_color_picker">Color Picker</string>
   <string name="press_color_to_apply">Press on Color to apply</string>
