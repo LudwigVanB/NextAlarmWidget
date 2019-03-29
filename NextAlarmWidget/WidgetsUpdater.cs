@@ -88,18 +88,8 @@ namespace NextAlarmWidget
                 updateViews.SetImageViewBitmap(Resource.Id.alarm_icon, resultBitmap);
                 
                 var backgroundColor = new Color(prefs.GetInt(PrefsKeys.BackgroundColor + appWidgetId, context.GetCompatColor(Resource.Color.background)));
-                try
-                {
-                    IntPtr cls = JNIEnv.FindClass("android/widget/RemoteViews");
-                    //void setDrawableParameters(int viewId, boolean targetBackground, int alpha, int colorFilter, PorterDuff.Mode mode, int level)
-                    IntPtr mth = JNIEnv.GetMethodID(cls, "setDrawableParameters", "(IZIILandroid/graphics/PorterDuff$Mode;I)V");
-                    JNIEnv.CallVoidMethod(updateViews.Handle, mth, new JValue(Resource.Id.box), new JValue(true),
-                        new JValue(backgroundColor.A), new JValue(backgroundColor.ToArgb()), new JValue(PorterDuff.Mode.Src), new JValue(0));
-                } catch (System.Exception e)
-                {
-                    Log.Error("NextAlarmWidget", "Exception when using reflection " + e.ToString());
-                }
-
+                updateViews.SetInt(Resource.Id.background, "setColorFilter", backgroundColor.ToArgb());
+                updateViews.SetInt(Resource.Id.background, "setAlpha", backgroundColor.A);                
 
                 updateViews.SetOnClickPendingIntent(Resource.Id.widget_root, nextAlarm.RelayIntent);
                 appWidgetManager.UpdateAppWidget(appWidgetId, updateViews);

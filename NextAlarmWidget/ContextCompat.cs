@@ -23,7 +23,9 @@ namespace NextAlarmWidget
             }
             else
             {
+#pragma warning disable CS0618 // Type or member is obsolete
                 return res.GetColor(resId);
+#pragma warning restore CS0618 // Type or member is obsolete
             }
         }
     }

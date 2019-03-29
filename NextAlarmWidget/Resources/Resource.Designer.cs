@@ -94,23 +94,26 @@ namespace NextAlarmWidget
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f07000f
-			public const int alarm_date = 2131165199;
+			// aapt resource value: 0x7f070010
+			public const int alarm_date = 2131165200;
+			
+			// aapt resource value: 0x7f070013
+			public const int alarm_icon = 2131165203;
 			
 			// aapt resource value: 0x7f070012
-			public const int alarm_icon = 2131165202;
+			public const int alarm_time_12 = 2131165202;
 			
 			// aapt resource value: 0x7f070011
-			public const int alarm_time_12 = 2131165201;
+			public const int alarm_time_24 = 2131165201;
 			
-			// aapt resource value: 0x7f070010
-			public const int alarm_time_24 = 2131165200;
+			// aapt resource value: 0x7f07000e
+			public const int background = 2131165198;
 			
 			// aapt resource value: 0x7f070001
 			public const int backround_picker = 2131165185;
 			
-			// aapt resource value: 0x7f07000e
-			public const int box = 2131165198;
+			// aapt resource value: 0x7f07000f
+			public const int box = 2131165199;
 			
 			// aapt resource value: 0x7f07000a
 			public const int color_picker_view = 2131165194;

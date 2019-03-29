@@ -4,15 +4,21 @@
     android:id="@+id/widget_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
-        android:id="@+id/box"
+	<ImageView
+		android:id="@+id/background"
+		android:src="@drawable/widget_background"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_alignTop="@+id/box"
+		android:layout_alignBottom="@id/box"/>
+	<LinearLayout
+        android:id="@id/box"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:background="@drawable/widget_background"
+        android:padding="5dp"		
         android:orientation="vertical">
-        <TextView
+		<TextView
             android:id="@+id/alarm_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,9 +40,10 @@
             tools:text="12:44 P"
             android:textSize="18dp"
             android:textColor="#ffffff"
-            android:gravity="right" />
+            android:gravity="right" />				
     </LinearLayout>
-    <ImageView
+	
+	<ImageView
         android:id="@+id/alarm_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
