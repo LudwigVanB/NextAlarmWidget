@@ -13,7 +13,7 @@
   <string name="icon_color">Icône:</string>
   <string name="create_widget">Créer widget</string>
   <string name="default_values">Réinitialiser</string>
-  <string name="time_offset">Décalage (minutes):</string>
+  <string name="time_offset">Décalage (min):</string>
 
   <string name="dialog_color_picker">Choix de couleur</string>
   <string name="press_color_to_apply">Appuyer sur la couleur pour la sélectionner</string>

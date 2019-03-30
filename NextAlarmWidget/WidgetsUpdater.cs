@@ -70,8 +70,10 @@ namespace NextAlarmWidget
 
                 var timeTextSize = prefs.GetInt(PrefsKeys.TimeTextSize + appWidgetId, -1);
                 if (timeTextSize != -1)
+                {
                     updateViews.SetTextViewTextSize(Resource.Id.alarm_time_24, (int)ComplexUnitType.Dip, timeTextSize);
                     updateViews.SetTextViewTextSize(Resource.Id.alarm_time_12, (int)ComplexUnitType.Dip, timeTextSize);
+                }
 
                 var iconColor = new Color(prefs.GetInt(PrefsKeys.IconColor + appWidgetId, context.GetCompatColor(Resource.Color.icon)));
                 Bitmap sourceBitmap = BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.ic_alarm_white_18dp);
@@ -86,10 +88,10 @@ namespace NextAlarmWidget
                 Canvas canvas = new Canvas(resultBitmap);
                 canvas.DrawBitmap(sourceBitmap, 0, 0, p);
                 updateViews.SetImageViewBitmap(Resource.Id.alarm_icon, resultBitmap);
-                
+
                 var backgroundColor = new Color(prefs.GetInt(PrefsKeys.BackgroundColor + appWidgetId, context.GetCompatColor(Resource.Color.background)));
                 updateViews.SetInt(Resource.Id.background, "setColorFilter", backgroundColor.ToArgb());
-                updateViews.SetInt(Resource.Id.background, "setAlpha", backgroundColor.A);                
+                updateViews.SetInt(Resource.Id.background, "setAlpha", backgroundColor.A);
 
                 updateViews.SetOnClickPendingIntent(Resource.Id.widget_root, nextAlarm.RelayIntent);
                 appWidgetManager.UpdateAppWidget(appWidgetId, updateViews);

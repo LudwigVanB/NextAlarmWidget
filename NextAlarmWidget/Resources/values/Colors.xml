@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
 
+  <color name="black">#000000</color>
   <color name="background">#99000000</color>
   <color name="time">#ffffff</color>
   <color name="date">#A1A1A1</color>
