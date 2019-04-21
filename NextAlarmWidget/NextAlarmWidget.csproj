@@ -69,7 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlarmClockChangedReceiver.cs" />
-    <Compile Include="AlarmRelayService.cs" />
     <Compile Include="ConfigurationActivity.cs" />
     <Compile Include="ContextCompat.cs" />
     <Compile Include="MonoDroid.ColorPickers\AlphaPatternDrawable.cs" />
@@ -81,6 +80,7 @@
     <Compile Include="NextAlarm.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TapReceiver.cs" />
     <Compile Include="Widget.cs" />
     <Compile Include="WidgetsUpdater.cs" />
   </ItemGroup>

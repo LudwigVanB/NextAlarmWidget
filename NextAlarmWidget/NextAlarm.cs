@@ -88,8 +88,8 @@ namespace NextAlarmWidget
             }
             nextAlarm._showAllAlarmsIntent = BuildShowAlarmsSystemIntent(context);
 
-            var relayIntent = new Intent(context, typeof(AlarmRelayService));
-            nextAlarm.RelayIntent = PendingIntent.GetService(context, 0, relayIntent, PendingIntentFlags.UpdateCurrent);
+            var relayIntent = new Intent(context, typeof(TapReceiver));
+            nextAlarm.RelayIntent = PendingIntent.GetBroadcast(context, 0, relayIntent, PendingIntentFlags.UpdateCurrent);
 
             return nextAlarm;
         }
@@ -116,7 +116,7 @@ namespace NextAlarmWidget
                     handlerThread.Start();
                     Looper looper = handlerThread.Looper;
                     var finishedHandler = new OnFinished(context, _showAllAlarmsIntent, handlerThread);
-                    _showAlarmIntent.Send(Result.Ok, finishedHandler, new Handler(looper)); ;
+                    _showAlarmIntent.Send(Result.Ok, finishedHandler, new Handler(looper));                    
                 }
                 catch (Exception)
                 {
@@ -143,8 +143,9 @@ namespace NextAlarmWidget
             public void OnSendFinished(PendingIntent pendingIntent, Intent intent, [GeneratedEnum] Result resultCode, string resultData, Bundle resultExtras)
             {
                 var packageManager = _context.PackageManager;
-                if (intent.ResolveActivity(packageManager) == null)
+                if (intent.ResolveActivity(packageManager) == null)                
                     _fallbackIntent.Send();
+                    
                 _handlerThread.QuitSafely();                
             }
         }
